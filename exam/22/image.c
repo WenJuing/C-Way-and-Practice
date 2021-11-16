@@ -14,7 +14,7 @@ DDDDDDD
 */
 int main()
 {
-    show_diamond(7);
+    show_diamond(3);
     system("pause");
     return 0;
 }

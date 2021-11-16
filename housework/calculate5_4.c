@@ -4,13 +4,15 @@
 
 int main()
 {
+    // (1)
     int x, a=1, b=1, c=1, d, y, z, m;
     x = (a=0) || (b=2) || (c=3);
     printf("%d %d %d %d\n", x, a, b, c);
+    // (2)
     a=b=c=d=0;
     x = (a=1)||(b=2)&&(c=3)&&(d=4);
     printf("%d %d %d %d %d\n", x, a, b, c,d);
-    
+    // 5.5 (2)
     m=3, x=2, y=4, z=1;
     m = (m<x) ? m : x++;
     m = (m<y) ? m : y++;

@@ -10,11 +10,17 @@ void Armstrong();       // 找到2 3 4 5位的所有[Armstrong数]
 int get_max_num(int n); // 求一个正整数的[最大素数因子]
 void Narcissistic();    // 找到所有[水仙花数]
 bool is_prime(int n);   // 判断是否是[素数]
+void sum_an();          // 求2/1+3/2+5/3+8/5+...前20项和
 // 计算两个日期相隔的天数
 int diff(int start_y, int start_m, int start_d, int end_y, int end_m, int end_d); 
+// 辅助函数**********************************************************
+int Fibo(int n);// 求第n位斐波那契数列
+void fun1();    // 方法1：直接求斐波那契数列的相关项，再直接算
+void fun2();    // 方法2：找规律，再计算
+
 int main()
 {
-    printf("相隔%d天\n", diff(1999,2,16,2021,11,14));
+    sum_an();
     system("pause");
     return 0;
 }
@@ -68,4 +74,36 @@ int diff(int start_y, int start_m, int start_d, int end_y, int end_m, int end_d)
     d2 = y2*365 + y2/4 - y2/100 + y2/400 + (m2*306 + 5) / 10 + (end_d-1);
 
     return d2 - d1;
+}
+int Fibo(int n)
+{
+    if (n==2 || n==1)
+        return 1;
+    else return Fibo(n-1)+Fibo(n-2);
+}
+void fun1()
+{
+    int i;
+    float sum = 0.0;
+    for (i = 2; i <= 21; i++)
+        sum += Fibo(i+1)*1.0 / Fibo(i);
+    printf("方法一：前20项和为：%f\n", sum);
+}
+void fun2()
+{
+    // 设an = x/y，则an+1 = (x+y)/x
+    int i, t;
+    float x, y, sum = 0;
+    x = 2, y = 1;
+    for (i = 0; i < 20; i++)
+    {
+        sum += x / y;
+        t = x;x = x + y; y = t;
+    }
+    printf("方法二：前20项和为：%f\n", sum);
+}
+void sum_an()
+{
+    fun1();
+    fun2();
 }

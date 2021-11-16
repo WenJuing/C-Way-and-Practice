@@ -13,7 +13,6 @@ int main()
     printf("(6)%d\n", 5&&8!=(5&&8));
     printf("(7)%d\n", 1==6>4);
     printf("(8)%d\n", (b=10)&&(c=0));
-    printf("(9)%d\n", 5&&8);
     
     system("pause");
     return 0;
