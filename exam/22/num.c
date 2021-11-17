@@ -11,6 +11,10 @@ int get_max_num(int n); // 求一个正整数的[最大素数因子]
 void Narcissistic();    // 找到所有[水仙花数]
 bool is_prime(int n);   // 判断是否是[素数]
 void sum_an();          // 求2/1+3/2+5/3+8/5+...前20项和
+void unique_num();      // 有0、1、2、3、4，能组成多少个互不相同且无重复数字的3位数？并输出这些3位数
+void prime_factor();    // 将一个不小于2的整数分解质因数。例如 90 = 2 * 3 * 3 * 5
+void sort_select();     // 对10个整数用 选择排序 进行降序排序并输出
+void sort_bubble();     // 对10个整数用 冒泡排序 进行升序排序并输出
 // 计算两个日期相隔的天数
 int diff(int start_y, int start_m, int start_d, int end_y, int end_m, int end_d); 
 // 辅助函数**********************************************************
@@ -106,4 +110,82 @@ void sum_an()
 {
     fun1();
     fun2();
+}
+void unique_num()
+{
+    int i, j, k, count = 0;;
+    for (i = 1; i <= 4; i++)
+        for (j = 0; j <= 4; j++)
+            for (k = 0; k <= 4; k++)
+                if (i != j && i != k && j != k)
+                {
+                    printf("%d ", i*100+j*10+k);
+                    count++;
+                    if (count % 10 == 0) putchar('\n');
+                }
+    printf("\n共有%d个3位数\n", count);
+}
+void prime_factor()
+{
+    int n, k = 2;
+    printf("请输入一个大于或等于2的整数：");
+    scanf("%d", &n);
+    printf("质因子分解结果：%d=", n);
+    while (1)
+    {
+        if (n % k == 0)
+        {
+            n /= k;
+            if (n > 1)
+                printf("%d*", k);
+            else
+            {
+                printf("%d\n", k);  // 分解完毕
+                break;
+            }
+        }
+        else
+            k++;
+    }
+}
+void sort_select()
+{
+    int a[10] = {8,3,5,-1,33,23,10,-52,12,44};
+    int i, j, t, max_index;
+    for (i = 0; i < 10; i++)
+    {
+        max_index = i;
+        for (j = i; j < 10; j++)
+        {
+            if (a[j] > a[max_index])    // 找到最大的一个数的下标
+            {
+                max_index = j;
+            }
+        }
+        if (a[max_index] != a[i])  // 若找到最大的数，则交换
+        {
+            t = a[i];
+            a[i] = a[max_index];
+            a[max_index] = t;
+        }
+    }
+    for (i = 0; i < 10; i++)
+        printf("%5d", a[i]);
+    printf("\n");
+}
+void sort_bubble()
+{
+    int a[10] = {8,3,5,-1,33,23,10,-52,12,44};
+    int i, j, t;
+    for (i = 1; i < 10; i++)
+        for (j = 1; j < 10-i; j++)
+            if (a[j-1] > a[j])
+            {
+                t = a[j-1];
+                a[j-1] = a[j];
+                a[j] = t;
+            }
+    for (i = 0; i < 10; i++)
+        printf("%5d", a[i]);
+    printf("\n");
 }
