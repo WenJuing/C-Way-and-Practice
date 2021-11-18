@@ -1,6 +1,7 @@
 // 打印图像专题
 #include <stdio.h>
 #include <windows.h>
+#define S 30
 void show_diamond(int n);
 // 输出菱形，比如N=7时
 /*
@@ -19,9 +20,15 @@ void pascal_triangle(); // 利用一维数组打印下图所示的杨辉三角�
 // 1  3  3  1
 // 1  4  6  4  1
 // 1  5  10  5  1
+void show_char_triangle();  // 输出字符三角形
+// ABCDEFGHI
+//  ABCDEFG
+//   ABCDE
+//    ABC
+//     A
 int main()
 {
-    pascal_triangle();
+    show_char_triangle();
     system("pause");
     return 0;
 }
@@ -62,6 +69,18 @@ void pascal_triangle()
             a[j] = a[j] + a[j-1];
         for (j = 1; j <= i; j++)
             printf("%-4d", a[j]);
+        printf("\n");
+    }
+}
+void show_char_triangle()
+{
+    int i, j, k;
+    for (i = 1; i <= 5; i++)
+    {
+        for (j = 0; j < S + 5 + i; j++)
+            putchar(' ');
+        for (k = 1; k <= 11-2*i; k++)
+            putchar('A'+k-1);
         printf("\n");
     }
 }

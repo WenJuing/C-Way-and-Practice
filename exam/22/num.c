@@ -15,6 +15,7 @@ void unique_num();      // 有0、1、2、3、4，能组成多少个互不相同
 void prime_factor();    // 将一个不小于2的整数分解质因数。例如 90 = 2 * 3 * 3 * 5
 void sort_select();     // 对10个整数用 选择排序 进行降序排序并输出
 void sort_bubble();     // 对10个整数用 冒泡排序 进行升序排序并输出
+void same_number();     // 输入一个不超过9位的无符号整数，判断该整数中是否存在重复的数字
 // 计算两个日期相隔的天数
 int diff(int start_y, int start_m, int start_d, int end_y, int end_m, int end_d); 
 // 辅助函数**********************************************************
@@ -188,4 +189,23 @@ void sort_bubble()
     for (i = 0; i < 10; i++)
         printf("%5d", a[i]);
     printf("\n");
+}
+void same_number()
+{
+    int i, t, n, flag = 0, count[10] = {0};
+    printf("请输入一个正整数：");
+    scanf("%d", &n);
+    t = n;
+    while (t)
+    {
+        count[t % 10]++;    // 取该整数的每一位，并统计频数
+        t /= 10;
+    }
+    for (i = 0; i < 10; i++)
+        if (count[i] > 1)
+            flag = 1;
+    if (flag)
+        printf("整数%d存在相同的数字\n", n);
+    else
+        printf("整数%d没有相同的数字\n", n);
 }

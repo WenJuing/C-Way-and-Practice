@@ -10,6 +10,7 @@ void compare(char * s1, char * s2); // 比较两个字符串的大小，并输�
 void invert_text();     // 将文本倒叙输出。示例：I love you -> you love I
 void cout_word_one();   // 统计文本单词数量（方法1：利用数组）
 void cout_word_two();   // 统计文本单词数量（方法2：利用状态标志变量）
+void substr();          // 输入起始位置和长度，从主串截取字串
 int main()
 {
     char str[20] = "azdwgtjqmn";
@@ -83,4 +84,24 @@ void cout_word_two()
         }
     }
     printf("单词统计：%d个\n", count);
+}
+// 输入一个字符串存到主串str，输入起始位置loc和长度len，截取字串存储到substr中
+// 若截取长度不够，则就截取这么多
+void substr()
+{
+    int i, j = 0, loc, len;
+    char str[81], substr[81];
+    printf("请输入一个字符串：");
+    gets(str);
+    printf("开始截取字串，请输入起始位置和截取长度：");
+    scanf("%d %d", &loc, &len);
+    if (loc < 1 || loc > strlen(str) || len == 0)
+        substr[0] = '\0';
+    else 
+    {
+        for (i = loc - 1; j<len && str[i]!='\0'; i++, j++)
+            substr[j] = str[i];
+        substr[j] = '\0';
+    }
+    printf("主串：%s\n子串：%s\n", str, substr);
 }
