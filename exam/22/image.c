@@ -13,13 +13,14 @@ DDDDDDD
   FFF
    G 
 */
-void pascal_triangle(); // 利用一维数组打印下图所示的杨辉三角形（Pascal triangle）
+void pascal_triangle_one(); // 利用一维数组打印下图所示的杨辉三角形（Pascal triangle）
+void pascal_triangle2_two(); // 利用二维数组打印下图所示的杨辉三角形（Pascal triangle）
 // 1
 // 1  1
 // 1  2  1
 // 1  3  3  1
 // 1  4  6  4  1
-// 1  5  10  5  1
+// 1  5  10  10 5  1
 void show_char_triangle();  // 输出字符三角形
 // ABCDEFGHI
 //  ABCDEFG
@@ -57,7 +58,7 @@ void show_diamond(int n)
         putchar('\n');
     }
 }
-void pascal_triangle()
+void pascal_triangle_one()
 {
     int a[7], i, j;
     a[1] = 1;       // 生成第1行，递推的基
@@ -69,6 +70,21 @@ void pascal_triangle()
             a[j] = a[j] + a[j-1];
         for (j = 1; j <= i; j++)
             printf("%-4d", a[j]);
+        printf("\n");
+    }
+}
+void pascal_triangle2_two()
+{
+    int i, j, a[6][6];
+    for (i = 0; i < 6; i++) // 把两侧赋值为1
+        a[i][0] = a[i][i] = 1;
+    for (i = 2; i < 6; i++)
+        for (j = 1; j < i; j++)
+            a[i][j] = a[i-1][j-1] + a[i-1][j];
+    for (i = 0; i < 6; i++) // 打印
+    {
+        for (j = 0; j <= i; j++)
+            printf("%3d", a[i][j]);
         printf("\n");
     }
 }

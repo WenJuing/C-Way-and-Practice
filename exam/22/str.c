@@ -5,12 +5,13 @@
 #include <stdio.h>
 #include <windows.h>
 
-void converse(char * str);  // 将每个字符向前轮换移动4个。比如abz -> efd
+void converse(char * str);  // 将每个字符向前转化4个位置。比如abz -> efd
 void compare(char * s1, char * s2); // 比较两个字符串的大小，并输出差值
-void invert_text();     // 将文本倒叙输出。示例：I love you -> you love I
+void invert_text();     // 将文本倒叙输出。示例：I love you -> you love I（重要）
 void cout_word_one();   // 统计文本单词数量（方法1：利用数组）
 void cout_word_two();   // 统计文本单词数量（方法2：利用状态标志变量）
 void substr();          // 输入起始位置和长度，从主串截取字串
+void subtract_num();    // 输入一个字符串，提取字符串中的数字，并输出全部数字及个数（重要）
 int main()
 {
     char str[20] = "azdwgtjqmn";
@@ -104,4 +105,30 @@ void substr()
         substr[j] = '\0';
     }
     printf("主串：%s\n子串：%s\n", str, substr);
+}
+void subtract_num()
+{
+    char str[81], last_is_char = 1, * p = str;
+    int i, count = 0, num;
+    printf("请输入一个字符串：");
+    gets(str);
+    while (*p)
+    {
+        if (!isdigit(*p))   // 若非数字
+        {
+            last_is_char = 1;
+            p++;
+        }
+        else
+        {
+            if (last_is_char)   // 若上一个是非数字，则标志新数字的开始
+            {
+                last_is_char = 0;
+                for (num = 0; isdigit(*p); p++) // 连续处理数字，直到不是数字时结束
+                    num = num*10 + *p - '0';
+                count++;
+                printf("数字%d：%d\n", count, num);
+            }
+        }
+    }
 }

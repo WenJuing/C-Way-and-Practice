@@ -16,13 +16,15 @@ void prime_factor();    // 将一个不小于2的整数分解质因数。例如 
 void sort_select();     // 对10个整数用 选择排序 进行降序排序并输出
 void sort_bubble();     // 对10个整数用 冒泡排序 进行升序排序并输出
 void same_number();     // 输入一个不超过9位的无符号整数，判断该整数中是否存在重复的数字
+void sample_calculation(); // 输入表达式（只包含+-两种运算符），计算结果并输出
+void insert_arr();      // 将一数插入一升序数组中，使插入后仍为升序
 // 计算两个日期相隔的天数
 int diff(int start_y, int start_m, int start_d, int end_y, int end_m, int end_d); 
 // 辅助函数**********************************************************
 int Fibo(int n);// 求第n位斐波那契数列
 void fun1();    // 方法1：直接求斐波那契数列的相关项，再直接算
 void fun2();    // 方法2：找规律，再计算
-
+float evaluate(float left, char op, float right);   // 进行四则运算
 int main()
 {
     sum_an();
@@ -208,4 +210,60 @@ void same_number()
         printf("整数%d存在相同的数字\n", n);
     else
         printf("整数%d没有相同的数字\n", n);
+}
+// 本题只包含+-两种运算符，若还包括*/运算符，请读者自行思考如何实现计算
+void sample_calculation()
+{
+    float left, right;
+    char op;
+    printf("请输入一个算数表达式：");
+    scanf("%f", &left);
+    op = getchar();
+    scanf("%f", &right);
+    printf("结果为：%f\n", evaluate(left, op, right));
+}
+float evaluate(float left, char op, float right)
+{
+    float res;
+    if (op == '+') res = left+right;
+    else if (op == '-') res = left-right;
+    else if (op == '*') res = left*right;
+    else if (op == '/')
+    {
+        if (right == 0)
+        {
+            printf("分母不能为0！\n");
+            exit(1);
+        }
+        else
+        {
+            res = left / right;
+        }
+    }
+    else
+        printf("非法的输入！\n");
+    return res;
+}
+void insert_arr()
+{
+    int a[10]={1,3,5,7,9}, n, * p;
+    printf("原数组：");
+    for (p=a; *p; p++)
+        printf("%d  ", *p);
+    printf("\n");
+    printf("输入要插入的数:");
+    scanf("%d", &n);
+    p = a;
+    while (*p)   // 定位到结束符
+        p++;
+    while (*(p-1)>n)    // 移动
+    {
+        *p = *(p-1);
+        p--;
+    }
+    *p = n;
+    printf("新数组：");
+    for (p=a; *p; p++)
+        printf("%d   ", *p);
+    printf("\n");
 }

@@ -1,6 +1,7 @@
-// 输入表达式（只包含+-两种运算符），计算结果并输出
+// 输入一步运算的表达式(+-*/)，计算结果并输出
 #include <stdio.h>
 #include <windows.h>
+#include <stdlib.h>
 float evaluate(float left, char op, float right);
 int main()
 {
@@ -8,13 +9,9 @@ int main()
     char op;
     printf("请输入一个算数表达式：");
     scanf("%f", &left);
-    while ((op=getchar()) != '\n')
-    {
-        scanf("%f", &right);
-        left = evaluate(left, op, right);
-    }
-
-    printf("结果为：%f\n", left);
+    op = getchar();
+    scanf("%f", &right);
+    printf("结果为：%f\n", evaluate(left, op, right));
     system("pause");
     return 0;
 }
