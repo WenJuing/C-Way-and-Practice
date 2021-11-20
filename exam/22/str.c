@@ -12,6 +12,9 @@ void cout_word_one();   // 统计文本单词数量（方法1：利用数组）
 void cout_word_two();   // 统计文本单词数量（方法2：利用状态标志变量）
 void substr();          // 输入起始位置和长度，从主串截取字串
 void subtract_num();    // 输入一个字符串，提取字符串中的数字，并输出全部数字及个数（重要）
+int get_substr_pos(char * substr, char * str); // 输出字串在主串第一次出现的位置，若找不到字串，则返回0
+int count_word(char * str);  // 统计单词个数（参数为字符串形式）
+int longest_word(char * str);  // 输出最长单词，并返回其个数（重要）
 int main()
 {
     char str[20] = "azdwgtjqmn";
@@ -40,17 +43,15 @@ void compare(char * s1, char * s2)
 }
 void invert_text()
 {
-    int i, cout = 0;
-    char ch, list[100][20];
-    puts("输入一个字符串：");
-    for (i = 0; i < 100; i++)
+    int i;
+    char word[81][81], ch;
+    for (i = 0; i < 81; i++)
     {
-        scanf("%s", list[i]);
-        cout++;
-        if((ch=getchar()) == '\n') break;
+        scanf("%s", word[i]);
+        if ((ch=getchar()) == '\n') break;
     }
-    for (i = cout-1; i >= 0; i--)
-        printf("%s ", list[i]);
+    while (word[i][0])
+        printf("%s ", word[i--]);
     putchar(10);
 }
 void cout_word_one()
@@ -131,4 +132,63 @@ void subtract_num()
             }
         }
     }
+}
+int get_substr_pos(char * substr, char * str)
+{
+    int i, j, post;
+    for (post = 0; str[post]; post++)
+    {
+        i = 0, j = post;
+        while (substr[i] && substr[i]==str[j]) i++, j++;
+        if (substr[i] == '\0')
+            return post+1;
+    }
+    return 0;
+}
+int longest_word(char * str)
+{
+    int i = 0, j, max_len = 0, count = 0, last_is_blank = 1;
+    char word[81][81];
+    while (*str)
+    {
+        if (*str == ' ')
+            last_is_blank = 1;
+        else
+        {
+            if (last_is_blank)
+            {
+                last_is_blank = 0;
+                for (j = 0; *str != ' ' && *str; j++, str++)    // 保存单词
+                    word[i][j] = *str;
+                i++;
+                last_is_blank = 1;  // 结束说明是空格
+                if (j > max_len) max_len = j;   // 获取最大单词长度
+            }
+        }
+        str++;
+    }
+    // 输出最长的单词
+    for (i = 0; word[i][0]; i++)
+    {
+        if (strlen(word[i]) == max_len)
+        {
+            puts(word[i]);
+            count++;
+        }
+    }
+    return count;
+}
+int count_word(char * str)
+{
+    int count = 0, last_is_blank = 1;
+    while (*str)
+    {
+        if (*str == ' ')
+            last_is_blank = 1;
+        else
+            if (last_is_blank)
+                last_is_blank = 0, count++;
+        str++;
+    }
+    return count;
 }
