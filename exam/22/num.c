@@ -18,6 +18,8 @@ void sort_bubble();     // 对10个整数用 冒泡排序 进行升序排序并�
 void same_number();     // 输入一个不超过9位的无符号整数，判断该整数中是否存在重复的数字
 void sample_calculation(); // 输入表达式（只包含+-两种运算符），计算结果并输出
 void insert_arr();      // 将一数插入一升序数组中，使插入后仍为升序
+void fine_a_an_dian();  // 找到一个二维数组的鞍点（该行最大，该列最小）
+void binary_search();   // 用折半查找法寻找要升序数组中要找的数
 // 计算两个日期相隔的天数
 int diff(int start_y, int start_m, int start_d, int end_y, int end_m, int end_d); 
 // 辅助函数**********************************************************
@@ -266,4 +268,46 @@ void insert_arr()
     for (p=a; *p; p++)
         printf("%d   ", *p);
     printf("\n");
+}
+void fine_a_an_dian()
+{
+    int a[4][4] = {
+        {1,2,3,4},
+        {4,10,1,5},
+        {0,1,2,3},  //  有一个鞍点，鞍点为a[2][3] = 3 
+        {11,11,11,11}};
+    int i, j, k, posti, postj, flag;
+    for (i = 0; i < 4; i++)
+    {
+        flag = 1;
+        for (j = 0; j < 4; j++)
+        {
+            posti = i, postj = 0;   // 默认值
+            if (a[i][j] > a[posti][postj]) posti=i, postj=j; // 找到该行最大值的坐标
+        }
+        for (k = 0; k < 4; k++) // 与该列的其他值比较
+            if (a[posti][postj] > a[k][postj])
+                flag = 0;
+        if (flag == 1)
+            printf("鞍点为a[%d][%d]=%d\n", posti, postj, a[posti][postj]);
+    }
+}
+void binary_search()
+{
+    int i, n, low=0, high=9, mid, flag = 0,a[10]={1,2,3,5,7,12,14,22,25,44};
+    for (i=0; i<10; i++) printf("%d  ", a[i]);
+    printf("\n请输入一个要查找的数：");
+    scanf("%d", &n);
+    while (low <= high) // 注意1：≤
+    {
+        mid = (low + high) / 2;
+        if (n == a[mid])
+        {
+            flag = 1;
+            break;
+        }
+        else if (n < a[mid]) high = mid - 1;    // 注意2：不是等于mid
+        else low = mid + 1;
+    }
+    flag ? printf("数组中第%d个数是%d\n", mid+1, n) : printf("数组中没有%d这个数\n", n);
 }
