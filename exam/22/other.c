@@ -1,3 +1,4 @@
+// 其他类
 #include <stdio.h>
 #include <windows.h>
 #include <time.h>   // 使用time()
