@@ -3,10 +3,13 @@
 #include <windows.h>
 void point_to_point();  // 指向指针的指针
 void point_to_arr();    // 指向行指针的指针
+void point_to_point_arr();    // 指向指针的指针 数组
+void point_to_func();   // 指向函数的指针
+
+int get_max(int a, int b);
 int main()
 {
-    point_to_point();
-    point_to_arr();
+    point_to_func();
     system("pause");
     return 0;
 }
@@ -36,4 +39,28 @@ void point_to_arr()
             printf("%5d", *(*(p+i)+j));
         printf("\n");
     }
+}
+// **b[10]是** b的数组，每个成员都是一个指向指针的指针(指针指针)
+void point_to_point_arr()
+{
+    char * a[10] = {"hello", "china", "!"}; // a的成员是地址
+    char ** b[10];
+    b[0] = a;   // 赋值：指针=地址 指针指针=地址地址
+    b[1] = a+1;
+    b[2] = a+2;
+    for (int i = 0; i < 3; i++)
+        printf("%s ", *b[i]);   // b[i]是指针, *b[i]才是地址
+    printf("\n");
+}
+void point_to_func()
+{
+    int (*p)(int, int);
+    p = get_max;
+    printf("max is %d\n", p(11,22));    // 三种方法效果相同
+    printf("max is %d\n", (*p)(11,22));
+    printf("max is %d\n", get_max(11,22));
+}
+int get_max(int a, int b)
+{
+    return a > b ? a : b;
 }

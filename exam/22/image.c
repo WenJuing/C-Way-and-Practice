@@ -1,6 +1,7 @@
 // 打印图像专题
 #include <stdio.h>
 #include <windows.h>
+#include <string.h>
 #define S 30
 void show_diamond(int n);
 // 输出菱形，比如N=7时
@@ -33,9 +34,21 @@ void magical_square();  // 输入阶数，生成n阶魔方
 //   8  1  6
 //   3  5  7
 //   4  9  2
+void show_image1();  // 输出下列图像
+// INTERESTING
+// NTERESTING
+// TERESTING
+// ERESTING
+// RESTING
+// ESTING
+// STING
+// TING
+// ING
+// NG
+// G
 int main()
 {
-    show_char_triangle();
+    show_image1();
     system("pause");
     return 0;
 }
@@ -164,5 +177,14 @@ void magical_square()
         for (j = 0; j < n; j++)
             printf("%3d", a[i][j]);
         printf("\n");
+    }
+}
+void show_image1()
+{
+    char str[100] = "INTERESTING", * p = str;
+    while (*p)
+    {
+        puts(p);
+        strcpy(p, p+1);
     }
 }
