@@ -1,11 +1,9 @@
 // 字符串的使用
-// 1）轮换字符串。比如：abcde -> cdeab（向左轮换2次）
-// 2）查找字串，并输出第一次出现的位置
-// 3）
 #include <stdio.h>
 #include <windows.h>
-
-void converse(char * str);  // 将每个字符向前转化4个位置。比如abz -> efd
+#include <string.h>
+void change_char(char * str);  // 将每个字符向前转化4个位置。比如abz -> efd
+void rotate_str();             // 将每个字符轮换n个位置。比如abcde -> cdeab
 void compare(char * s1, char * s2); // 比较两个字符串的大小，并输出差值
 void invert_text();     // 将文本倒叙输出。示例：I love you -> you love I（重要）
 void cout_word_one();   // 统计文本单词数量（方法1：利用数组）
@@ -19,7 +17,7 @@ int main()
 {
     char str[20] = "azdwgtjqmn";
     char s1[] = "computing", s2[] = "computer";
-    cout_word_one();
+    rotate_str();
     system("pause");
     return 0;
 }
@@ -191,4 +189,25 @@ int count_word(char * str)
         str++;
     }
     return count;
+}
+void rotate_str()
+{
+    int i, n, len;  // n代表移动次数，opt代表移动方向：l左移、r右移
+    char opt, str[100], temp[100];
+    printf("请输入字符串：");
+    scanf("%s", str);
+    printf("输入移动方向(L/R)和长度：");
+    do {
+        scanf("%c %d", &opt, &n);
+    } while (!(opt=='L'||opt=='l'||opt=='R'||opt=='r'));
+    len = strlen(str);
+    strcpy(temp, str);
+    for (i = 0; i < len; i++)
+    {
+        if (opt == 'R' || opt == 'r')   // 右移n位
+            str[(i+n)%len] = temp[i];
+        else    // 左移n位
+            str[(len+(i-n)%len)%len] = temp[i];
+    }
+    printf("移动结果：%s\n", str);
 }
