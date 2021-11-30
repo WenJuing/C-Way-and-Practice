@@ -6,38 +6,27 @@
 // 2个5分、3个2分、5个1分，每次取5个，输出币值大于10，取1000次
 int main()
 {
-    int i, j, k, sum, n, count = 0, coin[10] = {5,5,2,2,2,1,1,1,1,1}, temp[10], array[3];
+    int i, five_coin, two_coin, one_coin, count = 0, sum;
+    int kind;   // 1对应5分，2对应2分，3对应1分
+    srand((unsigned)time(NULL));
     for (i = 0; i < 1000; i++)
     {
-        for (j = 0; j < 10; j++) temp[j] = coin[j];
-        for (j = 0; j < 3; j++) array[j] = 0;
-        // 取5个币
-        n = 10, sum = 0;
-        while (n != 5)
+        five_coin = two_coin = one_coin = 0;
+        while (five_coin + two_coin + one_coin < 5) // 取5枚硬币
         {
-            srand((unsigned)time(NULL));
-            k = random(1, 10);
-            if (temp[k] != 0)
-            {
-                sum += temp[k];
-                printf("取出%d分硬币，n=%d，i=%d\n", temp[k], n, i);
-                if (temp[k] == 5) array[0]++;
-                if (temp[k] == 2) array[1]++;
-                if (temp[k] == 1) array[2]++;
-                temp[k] = 0;
-                n--;
-            }
+            kind = random(1, 3);
+            if (kind == 1 && five_coin < 2) five_coin++; 
+            if (kind == 2 && two_coin < 3) two_coin++; 
+            if (kind == 3 && one_coin < 5) one_coin++; 
         }
-        if (sum >= 10)
+        sum = five_coin*5 + two_coin*2 + one_coin*1;
+        if (sum > 10)
         {
+            printf("%d枚5分+%d枚2分+%d枚1分=%d分\n", five_coin, two_coin, one_coin, sum);
             count++;
-            printf("\n第%d次成功取出，总共取了%d次，取币情况：\n", count, i+1);
-            if (array[0] != 0) printf("%d枚5分+", array[0]);
-            if (array[1] != 0) printf("%d枚2分+", array[1]);
-            if (array[2] != 0) printf("%d枚1分，", array[2]);
-            printf("共%d分\n\n", sum);
-        }  
+        }
     }
+    printf("经统计，在1000次取币里共有%d次币值大于10\n", count);
     system("pause");
     return 0;
 }

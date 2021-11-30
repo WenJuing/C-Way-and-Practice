@@ -7,8 +7,7 @@ int main()
     printf("输入一个正数：");
     scanf("%lf", &a);
     x2 = a / 2;
-    do
-    {
+    do {
         x1 = x2;
         x2 = 1 + (a - 1) / (1 + x1);
     } while (fabs(x1-x2) >= 1e-6);

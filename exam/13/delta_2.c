@@ -9,7 +9,6 @@ int main()
         for (j = 1; j <= i*2 - 1; j++) putchar('*');
         putchar('\n');
     }
-    
     system("pause");
     return 0;
 }

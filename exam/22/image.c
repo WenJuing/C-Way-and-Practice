@@ -3,7 +3,7 @@
 #include <windows.h>
 #include <string.h>
 #define S 30
-void show_diamond(int n);
+void show_diamond();
 // 输出菱形，比如N=7时
 /*
    A   
@@ -52,29 +52,22 @@ int main()
     system("pause");
     return 0;
 }
-void show_diamond(int n)
+void show_diamond()
 {
-    int i, j, k;
-    // 输出上三角
-    for (i = 0; i < (n-1)/2; i++)
+    int i, j, k, n, B = 30, C = 1;  //  B控制空格个数，C控制符号个数
+    printf("请输入行数：");
+    scanf("%d", &n);
+    for (i = 1; i <= n; i++)
     {
-        // 打印空格
-        for (j = 0; j<(n-1)/2 -i; j++) putchar(' ');
-        // 打印字符
-        for (k=0; k < i*2+1; k++) putchar('A'+i);
-        putchar('\n');
-    }
-    // 打印中间行
-    for (j = 0; j < n; j++) putchar('A'+(n+1)/2 -1);
-    putchar('\n');
-    // 输出下三角
-    for (i=0; i < (n-1)/2; i++)
-    {
-        // 打印空格
-        for (j = 0; j < i+1; j++) putchar(' ');
-        // 打印字符
-        for (k=0; k < n-2-2*i; k++) putchar('A'+i+(n+1)/2);
-        putchar('\n');
+        for (j = 1; j <= B; j++)    // 输出空格
+            putchar(' ');
+        for (k = 1; k <= C; k++)    // 输出字符
+            putchar('A' + i-1);
+        if (i < (n+1)/2)
+            B--, C += 2;
+        else
+            B++, C -= 2;
+        putchar('\n'); 
     }
 }
 void pascal_triangle_one()

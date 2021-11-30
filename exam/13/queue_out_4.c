@@ -3,28 +3,24 @@
 #define N 10
 int main()
 {
-    int i, q[11], k, len = N;
-    for (i = 1; i <= N; i++) q[i] = i;
-    i = 3;
-    k = 1;
-    printf("出队顺序：");
-    while (len > 2)
+    int i, cout, cur = 0, a[12] = {1,2,3,4,5,6,7,8,9,10,11,12};
+    for (i = 0; i < 10; i++)
     {
-        if (q[i] != 0) k++;
-        if (k == 2)
+        for (cout = 0; cout < 2; cur++, cur %= 12)
         {
-            q[i] = 0;
-            len--;
-            k = 0;
-            printf("%3d", i);
+            if (a[cur] != 0) cout++;
+            if (cout == 2) 
+            {
+                printf("%3d", a[cur]);
+                a[cur] = 0;
+            }
         }
-        i++;
-        if (i == 11) i = 1;
     }
-    printf("剩余2人的初始位置：");
-    for (i = 1; i <= N; i++)
-        if (q[i] != 0) printf("%3d", i);
-    putchar(10);
+    printf("\n最后两人的编号为：");
+    for (i = 0; i < 12; i++)
+        if (a[i] != 0)
+            printf("%3d", a[i]);
+    printf("\n");
     system("pause");
     return 0;
 }
