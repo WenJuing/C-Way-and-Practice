@@ -1,12 +1,12 @@
 # C-Way-and-Practice
-《C程序设计：方法与实践》作者：刘喜平
+:notebook_with_decorative_cover:《C程序设计：方法与实践》作者：刘喜平
 
 **包含内容**
 
-1、精选例题（example文件夹）
+:seedling: 精选例题（example文件夹）
 
-2、精选章末习题（houseword文件夹）
+:seedling: 精选章末习题（houseword文件夹）
 
-3、专业课831历年大题答案、22专业课预测题型（exam文件夹）
+:seedling: 专业课831历年大题答案、22专业课预测题型（exam文件夹）
 
-更新中...
+已更新完毕，若还有其他问题，请联系:penguin:QQ2515770452
