@@ -3,21 +3,33 @@
 #include <windows.h>
 #include <string.h>
 void change_char(char * str);  // 将每个字符向前转化4个位置。比如abz -> efd
+
 void rotate_str();             // 将每个字符轮换n个位置。比如abcde -> cdeab
+
 void compare(char * s1, char * s2); // 比较两个字符串的大小，并输出差值
+
 void invert_text();     // 将文本倒叙输出。示例：I love you -> you love I（重要）
+
 void cout_word_one();   // 统计文本单词数量（方法1：利用数组）
+
 void cout_word_two();   // 统计文本单词数量（方法2：利用状态标志变量）
+
 void substr();          // 输入起始位置和长度，从主串截取字串
+
 void subtract_num();    // 输入一个字符串，提取字符串中的数字，并输出全部数字及个数（重要）
+
 int get_substr_pos(char * substr, char * str); // 输出字串在主串第一次出现的位置，若找不到字串，则返回0
+
 int count_word(char * str);  // 统计单词个数（参数为字符串形式）
+
 int longest_word(char * str);  // 输出最长单词，并返回其个数（重要）
+
+void delete_overlap();  // 删除字符串中相邻重复的字符，只保留一个
 int main()
 {
     char str[20] = "azdwgtjqmn";
     char s1[] = "computing", s2[] = "computer";
-    rotate_str();
+    delete_overlap();
     system("pause");
     return 0;
 }
@@ -210,4 +222,15 @@ void rotate_str()
             str[(len+(i-n)%len)%len] = temp[i];
     }
     printf("移动结果：%s\n", str);
+}
+void delete_overlap()
+{
+    char str[80] = "abbcccddddeeeeeaabc", *p, *q;
+    for (p = str; *p; p++)
+    {
+        for (q=p; *q==*p; q++);
+        strcpy(p+1, q);
+    }
+
+    printf("结果为：%s\n", str);
 }
