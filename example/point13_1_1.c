@@ -36,7 +36,7 @@ void point_to_arr()
     for (i = 0; i < 3; i++)
     {
         for (j = 0; j < 3; j++)
-            printf("%5d", *(*(p+i)+j));
+            printf("%5d", *(*(p+i)+j));  // 直接当二维数组p[i][j]用
         printf("\n");
     }
 }

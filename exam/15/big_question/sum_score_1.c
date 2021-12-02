@@ -16,6 +16,7 @@ int main()
             printf("%5d", score[i][j]);
         putchar('\n');
     }
+    printf("\n");
     sum(score);
     for (i = 0; i < N; i++)
     {
@@ -33,4 +34,10 @@ void sum(int (*s)[8])
     for (i = 0; i < N; i++)
         for (j = 1; j < 8; j++)
             s[i][0] += s[i][j];
+    // for (i = 0; i < N; i++)
+    // {
+    //     for (j = 1; j <= 7; j++)
+    //         (*s)[0] += (*s)[j];
+    //     s++;
+    // }
 }
