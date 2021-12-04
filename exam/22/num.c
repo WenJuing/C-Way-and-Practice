@@ -37,6 +37,9 @@ void binary_search();   // 用折半查找法寻找要升序数组中要找的�
 void bao_shu();         // （约瑟夫环）8个人围成一圈，从第一个人开始报数（从1到3报数），
                         // 凡报到3的人退出圈子，问最后留下的原来第几号
 
+char buffer[80];
+char * int_to_hex(int n);   // 十进制转十六进制
+
 // 计算两个日期相隔的天数
 int diff(int start_y, int start_m, int start_d, int end_y, int end_m, int end_d); 
 
@@ -350,4 +353,27 @@ void bao_shu()
     }
     while (*p == 0) p++;
     printf("\n最后剩下的是%d号\n", *p);
+}
+char * int_to_hex(int n)
+{
+    static int i = 0;
+    if (n < 16)
+    {
+        if (n < 10)
+            buffer[i] = n + '0';
+        else
+            buffer[i] = n - 10 + 'A';
+        buffer[i+1] = '\0';
+    }
+    else
+    {
+        int_to_hex(n / 16);
+        n %= 16;
+        i++;
+        if (n < 10)
+            buffer[i] = n + '0';
+        else
+            buffer[i] = n - 10 + 'A';
+    }
+    return buffer;
 }
