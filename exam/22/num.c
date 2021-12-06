@@ -12,6 +12,8 @@ int get_max_num(int n); // 求一个正整数的[最大素数因子]
 
 void Narcissistic();    // 找到所有[水仙花数]
 
+void wan_shu();         // 找到10000以内所有的完数，比如：6=1+2+3
+
 bool is_prime(int n);   // 判断是否是[素数]
 
 void sum_an();          // 求2/1+3/2+5/3+8/5+...前20项和
@@ -39,6 +41,8 @@ void bao_shu();         // （约瑟夫环）8个人围成一圈，从第一个�
 
 char buffer[80];
 char * int_to_hex(int n);   // 十进制转十六进制
+
+void front_prime();  // 输出10000以内前任意n位都是质数的质数
 
 // 计算两个日期相隔的天数
 int diff(int start_y, int start_m, int start_d, int end_y, int end_m, int end_d); 
@@ -376,4 +380,38 @@ char * int_to_hex(int n)
             buffer[i] = n - 10 + 'A';
     }
     return buffer;
+}
+void wan_shu()
+{
+    int n, i, s, count = 0;
+    for (n = 2; n <= 10000; n++)
+    {
+        s = 0;
+        for (i = 1; i < n; i++)
+            if (n % i == 0)
+                s += i;
+        if (s == n)
+        {
+            printf("%d\n", n);
+            count++;
+        }
+    }
+    printf("总个数：%d\n", count);
+}
+void front_prime()
+{
+    int i, t;
+    for (i = 2; i <= 10000; i++)
+    {
+        t = i;
+        while (t)
+        {
+            if (is_prime(t))
+                t /= 10;
+            else
+                break;
+        }
+
+        if (t == 0) printf("%d\n", i);
+    }
 }

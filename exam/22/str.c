@@ -25,6 +25,12 @@ int count_word(char * str);  // 统计单词个数（参数为字符串形式）
 int longest_word(char * str);  // 输出最长单词，并返回其个数（重要）
 
 void delete_overlap();  // 删除字符串中相邻重复的字符，只保留一个
+
+void delete_random_char();  // 删除任意字符（重要）
+
+void delete_limit_char();   // 删除指定字符
+
+int check(char c);  // 判断当前字符是否为指定的字符
 int main()
 {
     char str[20] = "azdwgtjqmn";
@@ -233,4 +239,53 @@ void delete_overlap()
     }
 
     printf("结果为：%s\n", str);
+}
+void delete_random_char()
+{
+    int i = 0;
+    char str[100], del[100], t[100], *ps, *pd;
+    printf("请输入主串：");
+    gets(str);
+    printf("请输入要删除的字符：");
+    gets(del);
+    for (ps = str; *ps; ps++)
+    {
+        for (pd = del; *pd != *ps && *pd; pd++);
+        if (*pd == '\0') t[i++] = *ps;
+    }
+    t[i] = '\0'; // 形成字符串
+    strcpy(str, t);
+    printf("结果为：%s\n", str);
+}
+void delete_limit_char()
+{
+    int i = 0;
+    char str[100], t[100], *ps;
+    printf("请输入主串：");
+    gets(str);
+    for (ps = str; *ps; ps++)
+        if (check(*ps) == 0)
+            t[i++] = *ps;
+    t[i] = '\0';    // 形成字符串
+    strcpy(str, t);
+    printf("结果为：%s\n", str);
+}
+int check(char c)
+{
+    switch (c)
+    {
+        case 'a':
+        case 'A':
+        case 'e':
+        case 'E':
+        case 'o':
+        case 'O':
+        case 'u':
+        case 'U':
+        case 'i':
+        case 'I': 
+            return 1;
+        default :
+            return 0;
+    }
 }
