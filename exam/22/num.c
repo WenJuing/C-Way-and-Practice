@@ -8,7 +8,7 @@ void Armstrong();       // 找到2 3 4 5位的所有[Armstrong数]
 // Armstrong数：一个n位数等于其各位数的n次方之和
 // 例如：153=1^3+5^3+3^3、1634=1^4+6^4+3^4+4^4
 
-int get_max_num(int n); // 求一个正整数的[最大素数因子]
+int get_max_num(int n); // 求一个正整数的[最大素数因子]（重要）
 
 void Narcissistic();    // 找到所有[水仙花数]
 
@@ -20,7 +20,7 @@ void sum_an();          // 求2/1+3/2+5/3+8/5+...前20项和
 
 void unique_num();      // 有0、1、2、3、4，能组成多少个互不相同且无重复数字的3位数？并输出这些3位数
 
-void prime_factor();    // 将一个不小于2的整数分解质因数。例如 90 = 2 * 3 * 3 * 5
+void prime_factor();    // 将一个不小于2的整数分解质因数。例如 90 = 2 * 3 * 3 * 5（重要）
 
 void sort_select();     // 对10个整数用 选择排序 进行降序排序并输出
 
@@ -57,7 +57,7 @@ float evaluate(float left, char op, float right);   // 进行四则运算
 
 int main()
 {
-    bao_shu();
+    sort_bubble();
     system("pause");
     return 0;
 }
@@ -87,7 +87,6 @@ bool is_prime(int n)
 int get_max_num(int n)
 {
     int i, max = 0;
-    scanf("%d", &n);
     for (i = 2; i < n; i++) // 判断小于数本身的数（要求素数，i从2开始）
         if (n % i == 0 && is_prime(i)) max = i; // 是因子且是素数
     return max;
@@ -146,7 +145,7 @@ void sum_an()
 }
 void unique_num()
 {
-    int i, j, k, count = 0;;
+    int i, j, k, count = 0;
     for (i = 1; i <= 4; i++)
         for (j = 0; j <= 4; j++)
             for (k = 0; k <= 4; k++)
@@ -185,17 +184,13 @@ void sort_select()
 {
     int a[10] = {8,3,5,-1,33,23,10,-52,12,44};
     int i, j, t, max_index;
-    for (i = 0; i < 10; i++)
+    for (i = 0; i < 9; i++)
     {
         max_index = i;
-        for (j = i; j < 10; j++)
-        {
+        for (j = i+1; j < 10; j++)
             if (a[j] > a[max_index])    // 找到最大的一个数的下标
-            {
                 max_index = j;
-            }
-        }
-        if (a[max_index] != a[i])  // 若找到最大的数，则交换
+        if (max_index != i)  // 若找到最大的数，则交换
         {
             t = a[i];
             a[i] = a[max_index];
@@ -212,7 +207,7 @@ void sort_bubble()
     int i, j, t;
     for (i = 1; i < 10; i++)
         for (j = 1; j < 10-i; j++)
-            if (a[j-1] > a[j])
+            if (a[j-1] > a[j])  // 升序
             {
                 t = a[j-1];
                 a[j-1] = a[j];
