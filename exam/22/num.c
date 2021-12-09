@@ -26,11 +26,11 @@ void sort_select();     // 对10个整数用 选择排序 进行降序排序并�
 
 void sort_bubble();     // 对10个整数用 冒泡排序 进行升序排序并输出
 
-void same_number();     // 输入一个不超过9位的无符号整数，判断该整数中是否存在重复的数字
+void same_number();     // 输入一个不超过9位的无符号整数，判断该整数中是否存在重复的数字（重要）
 
 void sample_calculation(); // 输入表达式（只包含+-两种运算符），计算结果并输出
 
-void insert_arr();      // 将一数插入一升序数组中，使插入后仍为升序
+void insert_arr();      // 将一数插入一升序数组中，使插入后仍为升序（重要）
 
 void fine_a_an_dian();  // 找到一个二维数组的鞍点（该行最大，该列最小）
 
@@ -406,7 +406,6 @@ void front_prime()
             else
                 break;
         }
-
         if (t == 0) printf("%d\n", i);
     }
 }

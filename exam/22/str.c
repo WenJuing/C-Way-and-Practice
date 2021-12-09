@@ -2,7 +2,8 @@
 #include <stdio.h>
 #include <windows.h>
 #include <string.h>
-void change_char(char * str);  // 将每个字符向前转化4个位置。比如abz -> efd
+void change_add_char(char * p, int n);  // 将每个字符向前转化n个位置。比如abz -> efd（向前4）
+void change_sub_char(char * p, int n);  // 将每个字符向后转化n个位置。比如abc -> xyz（向后3）
 
 void rotate_str();             // 将每个字符轮换n个位置。比如abcde -> cdeab
 
@@ -33,11 +34,52 @@ void delete_limit_char();   // 删除指定字符
 int check(char c);  // 判断当前字符是否为指定的字符
 int main()
 {
-    char str[20] = "azdwgtjqmn";
+    char str[20] = "Abc+Xyz";
     char s1[] = "computing", s2[] = "computer";
-    delete_overlap();
+    change_sub_char(str, 5);
     system("pause");
     return 0;
+}
+void change_add_char(char * p, int n)
+{
+    printf("转化前：%s\n", p);
+    int i;
+    for (i = 0; p[i]; i++)
+    {
+        if (p[i] >= 'a' && p[i] <= 'z')
+            p[i] = 'a' + (p[i] - 'a' + n) % 26;
+        if (p[i] >= 'A' && p[i] <= 'Z')
+            p[i] = 'A' + (p[i] - 'A' + n) % 26;
+    }
+    printf("向前转化%d位：%s\n", n, p);
+}
+void change_sub_char(char * p, int n)
+{
+    int i, t;
+    printf("转化前：%s\n", p);
+    for (i = 0; p[i]; i++)
+    {
+        t = n;
+        if (p[i] >= 'a' && p[i] <= 'z')
+        {
+            if (p[i] - 'a' > t) p[i] -= t;
+            else
+            {
+                t = t - (p[i] - 'a');
+                p[i] = 'z' - (t - 1);
+            }
+        }
+        else if (p[i] >= 'A' && p[i] <= 'Z')
+        {
+            if (p[i] - 'A' > t) p[i] -= t;
+            else
+            {
+                t = t - (p[i] - 'A');
+                p[i] = 'Z' - (t - 1);
+            }
+        }
+    }
+    printf("向后转化%d位：%s\n", n, p);
 }
 void converse(char * str)
 {

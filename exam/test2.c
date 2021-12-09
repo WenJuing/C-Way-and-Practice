@@ -5,7 +5,10 @@ void front_prime();  // 输出10000以内前任意n位都是质数的质数
 int is_prime(int n);    // 判断是否是质数
 int main()
 {
-    front_prime();
+    int arr[10] = {1,2,3,4,5};
+    for (int i =0; arr[i]; i++)
+        printf("%3d", arr[i]);
+    printf("\n");
     system("pause");
     return 0;
 }
