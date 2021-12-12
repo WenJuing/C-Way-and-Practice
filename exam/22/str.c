@@ -7,15 +7,16 @@ void change_sub_char(char * p, int n);  // 将每个字符向后转化n个位置
 
 void rotate_str();             // 将每个字符轮换n个位置。比如abcde -> cdeab
 
-void compare(char * s1, char * s2); // 比较两个字符串的大小，并输出差值
+void compare(char * s1, char * s2); // 比较两个字符串的大小，并输出差值（重要）
 
-void invert_text();     // 将文本倒叙输出。示例：I love you -> you love I（重要）
+void invert_text();     // 将一行文本单词倒叙输出。示例：I love you -> you love I（重要）
+void invert_line();     // 将文本的行倒叙输出
 
 void cout_word_one();   // 统计文本单词数量（方法1：利用数组）
 
-void cout_word_two();   // 统计文本单词数量（方法2：利用状态标志变量）
+void cout_word_two();   // 统计文本单词数量（方法2：利用状态标志变量）（重要）
 
-void substr();          // 输入起始位置和长度，从主串截取字串
+void substr();          // 输入起始位置和长度，从主串截取字串（重要）
 
 void subtract_num();    // 输入一个字符串，提取字符串中的数字，并输出全部数字及个数（重要）
 
@@ -23,7 +24,7 @@ int get_substr_pos(char * substr, char * str); // 输出字串在主串第一次
 
 int count_word(char * str);  // 统计单词个数（参数为字符串形式）
 
-int longest_word(char * str);  // 输出最长单词，并返回其个数（重要）
+int longest_word(char * str);  // 输出最长单词，并返回该长度单词的个数（重要）
 
 void delete_overlap();  // 删除字符串中相邻重复的字符，只保留一个
 
@@ -34,9 +35,11 @@ void delete_limit_char();   // 删除指定字符
 int check(char c);  // 判断当前字符是否为指定的字符
 int main()
 {
-    char str[20] = "Abc+Xyz";
-    char s1[] = "computing", s2[] = "computer";
-    change_sub_char(str, 5);
+    char str[100] = "you are so bueatiful";
+    char str2[100] = "abc123cd34jfie234";
+    printf("%d\n", longest_word(str));
+    subtract_num();
+    putchar('\n');
     system("pause");
     return 0;
 }
@@ -62,7 +65,7 @@ void change_sub_char(char * p, int n)
         t = n;
         if (p[i] >= 'a' && p[i] <= 'z')
         {
-            if (p[i] - 'a' > t) p[i] -= t;
+            if (p[i] - 'a' >= t) p[i] -= t;
             else
             {
                 t = t - (p[i] - 'a');
@@ -71,7 +74,7 @@ void change_sub_char(char * p, int n)
         }
         else if (p[i] >= 'A' && p[i] <= 'Z')
         {
-            if (p[i] - 'A' > t) p[i] -= t;
+            if (p[i] - 'A' >= t) p[i] -= t;
             else
             {
                 t = t - (p[i] - 'A');
@@ -101,16 +104,25 @@ void compare(char * s1, char * s2)
 }
 void invert_text()
 {
-    int i;
-    char word[81][81], ch;
-    for (i = 0; i < 81; i++)
+    int i = 0;
+    char word[100][100], c;
+    while (1)
     {
-        scanf("%s", word[i]);
-        if ((ch=getchar()) == '\n') break;
+        scanf("%s",word[i]);
+        if ((c=getchar()) == '\n') break;
+        i++;
     }
-    while (word[i][0])
-        printf("%s ", word[i--]);
-    putchar(10);
+    for (; i >= 0; i--)
+        printf("%s ", word[i]);
+    putchar('\n');
+}
+void invert_line()
+{
+    char word[100][100], c;
+    int i = 0;
+    while (gets(word[i++]) != NULL);    // ctrl+z+[回车]结束输入
+    for (i -= 1; i >= 0; i--)
+        printf("%s\n", word[i]);
 }
 void cout_word_one()
 {
@@ -167,8 +179,8 @@ void substr()
 }
 void subtract_num()
 {
-    char str[81], last_is_char = 1, * p = str;
-    int i, count = 0, num;
+    char str[81], * p = str;
+    int i, count = 0, num, last_is_char = 1;
     printf("请输入一个字符串：");
     gets(str);
     while (*p)
@@ -210,7 +222,10 @@ int longest_word(char * str)
     while (*str)
     {
         if (*str == ' ')
+        {
             last_is_blank = 1;
+            str++;
+        }
         else
         {
             if (last_is_blank)
@@ -219,11 +234,9 @@ int longest_word(char * str)
                 for (j = 0; *str != ' ' && *str; j++, str++)    // 保存单词
                     word[i][j] = *str;
                 i++;
-                last_is_blank = 1;  // 结束说明是空格
                 if (j > max_len) max_len = j;   // 获取最大单词长度
             }
         }
-        str++;
     }
     // 输出最长的单词
     for (i = 0; word[i][0]; i++)
@@ -279,8 +292,14 @@ void delete_overlap()
         for (q=p; *q==*p; q++);
         strcpy(p+1, q);
     }
-
     printf("结果为：%s\n", str);
+    // 下面方法更直观易懂，但没有上面的高效
+    // while (*p)
+    // {
+    //     if (*p == *(p+1))
+    //         strcpy(p, p+1);
+    //     else p++;
+    // }
 }
 void delete_random_char()
 {

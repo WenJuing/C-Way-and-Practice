@@ -1,14 +1,19 @@
 #include <stdio.h>
 #include <windows.h>
 #include <math.h>
+#include <string.h>
 void front_prime();  // 输出10000以内前任意n位都是质数的质数
 int is_prime(int n);    // 判断是否是质数
 int main()
 {
-    int arr[10] = {1,2,3,4,5};
-    for (int i =0; arr[i]; i++)
-        printf("%3d", arr[i]);
-    printf("\n");
+    char str[100] = "abbcccdddeeeeaaab", *p = str;
+    while (*p)
+    {
+        if (*p == *(p+1))
+            strcpy(p, p+1);
+        else p++;
+    }
+    puts(str);
     system("pause");
     return 0;
 }
