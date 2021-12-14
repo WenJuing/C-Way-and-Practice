@@ -303,19 +303,18 @@ void delete_overlap()
 }
 void delete_random_char()
 {
-    int i = 0;
-    char str[100], del[100], t[100], *ps, *pd;
-    printf("请输入主串：");
+    char str[100], del[100], *p, *q;;
+    printf("输入主串：");
     gets(str);
-    printf("请输入要删除的字符：");
+    printf("输入删除字符集：");
     gets(del);
-    for (ps = str; *ps; ps++)
+    p = str;
+    while (*p)
     {
-        for (pd = del; *pd != *ps && *pd; pd++);
-        if (*pd == '\0') t[i++] = *ps;
+        for (q = del; *q!=*p&&*q; q++);
+        if (*q) strcpy(p, p+1);
+        else p++;   // 若删除的当前str的字符，则p暂时不动，继续判断（p的值变了）
     }
-    t[i] = '\0'; // 形成字符串
-    strcpy(str, t);
     printf("结果为：%s\n", str);
 }
 void delete_limit_char()
