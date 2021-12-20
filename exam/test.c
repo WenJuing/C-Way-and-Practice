@@ -5,61 +5,54 @@
 #include <conio.h>
 #include <stdlib.h>
 #include <math.h>
-#define PI 3.14159
-#define random(a, b) (rand()%(b-a+1)+a)
-void delete_random_char();  // 删除任意字符
-void delete_limit_char();   // 删除指定字符
-int check(char c);  // 指定字符
+void sort_word_from_file();   // 将两个文件的单词全部读取，并按字典顺序存入另一个文件
 int main()
 {
-    delete_random_char();
+    int i, j, a[3][3]={{1,1,1},{2,2,2},{3,3,3}}, t[3];
+    printf("输出数组：\n");
+    for (i = 0; i < 3; i++)
+    {
+         for (j = 0; j < 3; j++)
+            printf("%3d", a[i][j]);
+        printf("\n");
+    }
+    memcpy(t, a[0], sizeof(int)*3);
+    memcpy(a[0], a[1], sizeof(int)*3);
+    memcpy(a[1], t, sizeof(int)*3);
+    printf("输出数组：\n");
+    for (i = 0; i < 3; i++)
+    {
+         for (j = 0; j < 3; j++)
+            printf("%3d", a[i][j]);
+        printf("\n");
+    }
     system("pause");
     return 0;
 }
-void delete_random_char()
+void sort_word_from_file()
 {
-    int i = 0;
-    char str[100], del[100], *p1, *p2, *q;
-    printf("请输入主串：");
-    gets(str);
-    printf("请输入要删除的字符：");
-    gets(del);
-    p2 = str;
-    for (p1 = str; *p1; p1++)
-        for (q = del; *q != *p1 && *q; q++);    // 遍历删除字符集
-            if (*q == '\0') *p2++ = *p1;  // 若全部遍历完，则当前字符无需删除
-    p2[i] = '\0'; // 形成字符串
-    printf("结果为：%s\n", str);
-}
-void delete_limit_char()
-{
-    int i = 0;
-    char str[100], t[100], *ps;
-    printf("请输入主串：");
-    gets(str);
-    for (ps = str; *ps; ps++)
-        if (check(*ps) == 0)
-            t[i++] = *ps;
-    t[i] = '\0';    // 形成字符串
-    strcpy(str, t);
-    printf("结果为：%s\n", str);
-}
-int check(char c)
-{
-    switch (c)
-    {
-        case 'a':
-        case 'A':
-        case 'e':
-        case 'E':
-        case 'o':
-        case 'O':
-        case 'u':
-        case 'U':
-        case 'i':
-        case 'I': 
-            return 1;
-        default :
-            return 0;
-    }
+    int i, j, sum;
+    char word[1000][20], temp[20];
+    FILE * fp = fopen("test1.txt", "r");
+    // 读取文本单词
+    while (fscanf(fp, "%s", word + i) == 1) i++;
+    fclose(fp);
+    fp = fopen("test2.txt", "r");
+    while (fscanf(fp, "%s", word + i) == 1) i++;
+    fclose(fp);
+    sum = i;
+    // 排序
+    for (i = 1; i < sum; i++)
+        for (j = 1; j < sum; j++)
+            if (strcmp(word[j-1], word[j]) > 0)
+            {
+                strcpy(temp, word[j]);
+                strcpy(word[j], word[j-1]);
+                strcpy(word[j-1], temp);
+            }
+    // 保存
+    fp = fopen("test3.txt", "w");
+    for (i = 0; i < sum; i++)
+        fprintf(fp, "%s\n", word[i]);
+    fclose(fp);
 }
