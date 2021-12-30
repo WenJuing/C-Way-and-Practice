@@ -1,0 +1,49 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "shell",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "windows": {
+                "command": "g++",
+                "args": [
+                    "-ggdb",
+                    "\"${file}\"",
+                    "--std=c++11",
+                    "-o",
+                    "\"${fileDirname}\\${fileBasenameNoExtension}.exe\"",
+                    "-finput-charset=UTF-8",
+                    "-fexec-charset=GBK"
+                ]
+            }
+        },
+        {
+            "type": "shell",
+            "label": "C/C++: cpp.exe build active file",
+            "command": "D:\\mingw64\\bin\\cpp.exe",
+            "args": [
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build"
+        }
+    ]
+}

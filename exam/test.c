@@ -8,24 +8,14 @@
 void sort_word_from_file();   // 将两个文件的单词全部读取，并按字典顺序存入另一个文件
 int main()
 {
-    int i, j, a[3][3]={{1,1,1},{2,2,2},{3,3,3}}, t[3];
-    printf("输出数组：\n");
-    for (i = 0; i < 3; i++)
+    int i, j;
+    for (i = 0; i < 9; i++)
     {
-         for (j = 0; j < 3; j++)
-            printf("%3d", a[i][j]);
-        printf("\n");
+        for (j = 0; j < 9; j++)
+            putchar('A' +(i+j)%9);
+        putchar('\n');
     }
-    memcpy(t, a[0], sizeof(int)*3);
-    memcpy(a[0], a[1], sizeof(int)*3);
-    memcpy(a[1], t, sizeof(int)*3);
-    printf("输出数组：\n");
-    for (i = 0; i < 3; i++)
-    {
-         for (j = 0; j < 3; j++)
-            printf("%3d", a[i][j]);
-        printf("\n");
-    }
+
     system("pause");
     return 0;
 }

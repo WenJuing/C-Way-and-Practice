@@ -4,7 +4,7 @@
 long fun(int n)
 {
     static long int f = 0;
-    // (n % 2) ? f+=n : f-=n;
+    // n%2 ? f+=n : f-=n;
     return f;
 }
 int main()
