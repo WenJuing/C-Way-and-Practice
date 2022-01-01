@@ -17,9 +17,11 @@ void file_insert(); // 插入：插入一条学生数据
 void file_show();   // 输出：输出文件内容
 int main()
 {
+    file_write();
     file_show();
+    file_append();
+    file_update();
     file_insert();
-    file_show();
     system("pause");
     return 0;
 }

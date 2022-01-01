@@ -80,9 +80,8 @@ bool is_prime(int n)
 {
     int i;
     for (i = 2; i <= n/2; i++)
-        if (n % i == 0) break;
-    if (i > n/2) return true;
-    else return false;
+        if (n % i == 0) return false;
+    return true;
 }
 int get_max_num(int n)
 {

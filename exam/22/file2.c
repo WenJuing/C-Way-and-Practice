@@ -57,27 +57,28 @@ void count_from_file()
 }
 void sort_word_from_file()
 {
-    int i = 0, j, count;    // count代表全部单词数量
-    char word[200][50], tmp[50];
-    FILE * fp_one, * fp_two, * fp_all;
-    fp_one = fopen("file_one12_10.txt", "r");
-    fp_two = fopen("file_two12_10.txt", "r");
-    fp_all = fopen("file_all12_10.txt", "w");
-    while (fgets(word[i], 50, fp_one) != NULL) i++;
-    while (fgets(word[i], 50, fp_two) != NULL) i++;
-    count = i;
-    for (i = 0; i < count; i++)
-        for (j = i; j < count; j++)
-            if (strcmp(word[i], word[j]) > 0)   // 按a->z顺序排序
+    int i, j, sum;
+    char word[1000][20], temp[20];
+    FILE * fp = fopen("test1.txt", "r");
+    // 读取文本单词
+    while (fscanf(fp, "%s", word + i) == 1) i++;
+    fclose(fp);
+    fp = fopen("test2.txt", "r");
+    while (fscanf(fp, "%s", word + i) == 1) i++;
+    fclose(fp);
+    sum = i;
+    // 排序
+    for (i = 1; i < sum; i++)
+        for (j = 1; j < sum; j++)
+            if (strcmp(word[j-1], word[j]) > 0)
             {
-                strcpy(tmp, word[i]);
-                strcpy(word[i], word[j]);
-                strcpy(word[j], tmp);
+                strcpy(temp, word[j]);
+                strcpy(word[j], word[j-1]);
+                strcpy(word[j-1], temp);
             }
-    i = 0;
-    for (i = 0; i < count; i++)
-        fputs(word[i], fp_all);
-    fclose(fp_one);
-    fclose(fp_two);
-    fclose(fp_all);
+    // 保存
+    fp = fopen("test3.txt", "w");
+    for (i = 0; i < sum; i++)
+        fprintf(fp, "%s\n", word[i]);
+    fclose(fp);
 }
