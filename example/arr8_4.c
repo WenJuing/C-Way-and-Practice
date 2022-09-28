@@ -5,11 +5,6 @@
 int main()
 {
     int a[10]={1,3,5,7,9}, n, * p;
-    printf("原数组：");
-    for (p=a; *p; p++)
-        printf("%d  ", *p);
-    printf("\n");
-    printf("输入要插入的数:");
     scanf("%d", &n);
     p = a;
     while (*p)   // 定位到结束符
@@ -20,9 +15,8 @@ int main()
         p--;
     }
     *p = n;
-    printf("新数组：");
     for (p=a; *p; p++)
-        printf("%d   ", *p);
+        printf("%d ", *p);
     printf("\n");
     system("pause");
     return 0;

@@ -15,7 +15,7 @@
 // 3、若2000<=价格<5000，将其改为2400
 // 4、若500<=价格<2000，将其改为800
 // 5、若价格<500或性别不是M/W，将其英雄信息删除
-#define N 6
+#define N 3
 typedef struct hero {
     int id;
     char name[20];
@@ -33,21 +33,19 @@ int main()
 {
     HERO hero[N], * p;
     int i;  // 编号
-    // printf("输入%d名英雄的信息（姓名、性别、价格）：\n", N);
-    // for (i = 1, p = hero; p < hero + N; p++, i++)
-    // {
-    //     p->id = i;
-    //     scanf("%s %c %f", p->name, &p->gender, &p->price);
-    // }
-    // save_to_dat(hero, i-1);
-    // read_from_dat(hero);
-    // show(hero, N);
-    // read_from_dat(hero);
-    // sort(hero);
-    // show(hero, N);
-    // save_to_txt(hero);
-    read_from_txt(hero);
+    printf("输入%d名英雄的信息（姓名、性别、价格）：\n", N);
+    for (i = 1, p = hero; p < hero + N; p++, i++)
+    {
+        p->id = i;
+        scanf("%s %c %f", p->name, &p->gender, &p->price);
+    }
+    save_to_dat(hero, i-1);
+    read_from_dat(hero);
     show(hero, N);
+    sort(hero);
+    show(hero, N);
+    save_to_txt(hero);
+    read_from_txt(hero);
     update(hero);
     show(hero, N);
     system("pause");

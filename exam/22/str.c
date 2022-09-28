@@ -35,11 +35,7 @@ void delete_limit_char();   // 删除指定字符
 int check(char c);  // 判断当前字符是否为指定的字符
 int main()
 {
-    char str[100] = "you are so bueatiful";
-    char str2[100] = "abc123cd34jfie234";
-    printf("%d\n", longest_word(str));
-    subtract_num();
-    putchar('\n');
+    substr();
     system("pause");
     return 0;
 }
@@ -167,11 +163,11 @@ void substr()
     gets(str);
     printf("开始截取字串，请输入起始位置和截取长度：");
     scanf("%d %d", &loc, &len);
-    if (loc < 1 || loc > strlen(str) || len == 0)
+    if (loc < 1 || loc > strlen(str) || len == 0)   // ④
         substr[0] = '\0';
     else 
     {
-        for (i = loc - 1; j<len && str[i]!='\0'; i++, j++)
+        for (i = loc - 1; j<len && str[i]!='\0'; i++, j++)  // ⑤
             substr[j] = str[i];
         substr[j] = '\0';
     }
@@ -224,11 +220,11 @@ int longest_word(char * str)
         if (*str == ' ')
         {
             last_is_blank = 1;
-            str++;
+            str++;      // ①
         }
         else
         {
-            if (last_is_blank)
+            if (last_is_blank)      // ②
             {
                 last_is_blank = 0;
                 for (j = 0; *str != ' ' && *str; j++, str++)    // 保存单词
@@ -243,7 +239,7 @@ int longest_word(char * str)
     {
         if (strlen(word[i]) == max_len)
         {
-            puts(word[i]);
+            puts(word[i]);  // ③
             count++;
         }
     }

@@ -48,13 +48,13 @@ void show_image1();  // 输出下列图像
 // G
 int main()
 {
-    show_image1();
+    show_diamond();
     system("pause");
     return 0;
 }
 void show_diamond()
 {
-    int i, j, k, n, B = 30, C = 1;  //  B控制空格个数，C控制符号个数
+    int i, j, k, n, B = 2, C = 1;  //  B控制空格个数，C控制符号个数
     printf("请输入行数：");
     scanf("%d", &n);
     for (i = 1; i <= n; i++)

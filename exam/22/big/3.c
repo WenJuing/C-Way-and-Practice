@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <windows.h>
-typedef struct {
+typedef struct {    // 保存学生信息
     int id;
     float height;
 } Student;
@@ -8,7 +8,6 @@ void save();    // 保持学生数据
 void show();    // 输出报表
 int main()
 {
-
     save();
     show();
     system("pause");
@@ -29,21 +28,23 @@ void save()
 }
 void show()
 {
-    int i = 0, sum;
+    int i = 0, sum, height[25000], data[25000];   // 定义最高身高为2.5m
     Student stu;
-    int t, height[200] = {0};
     FILE * fp = fopen("data.txt", "rb");
     printf("\n身高\t人数\n");
-    printf("---------------\n");
     while (fread(&stu, sizeof(stu), 1, fp) == 1)
     {
-        t = stu.height;    // 提取全部身高
-        height[t]++;
-        printf("%.1f\n", height[i]);
+        height[i] = stu.height * 100;    // 提取全部身高到数组
         i++;
     }
-    printf("---------------\n");
     fclose(fp);
-    sum = i;
+    sum = i;    // 总人数
+    for (i = 0; i < sum; i++)   // 统计
+        data[height[i]]++;
+    printf("---------------\n");
+    for (i = 0; i < 25000; i++)
+        if (data[i])
+            printf("%.1f\t%d\n", i*1.0/100, data[i]);
+    printf("---------------\n");
     printf("共%d人\n", sum);
 }
